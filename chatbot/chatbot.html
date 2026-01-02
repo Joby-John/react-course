@@ -92,6 +92,22 @@
                 setTimeout(resolve, ms);
             })
         }
+        
+        //custom hook
+        function useAutoScroll(depedency){
+            const ref = React.useRef(null);
+            React.useEffect(()=>{
+                const element = ref.current;
+                if(element){
+                    element.scrollTop = element.scrollHeight;
+                }
+            },[depedency])
+
+            return ref;
+
+        }
+
+
         function ChatInput({chatMessages, setChatMessages}){
 
             const [inputText, setInputText] = React.useState('');
@@ -127,7 +143,8 @@
                     mssg.id === 'typing'
                     ?{...mssg, 
                         message:respose,
-                        id:'crypto.randomUUID'}
+                        id:crypto.randomUUID()
+                    }
                     : mssg
                     )
                 );
@@ -209,15 +226,9 @@
             );
         }
 
+        
         function ChatMessages({chatMessages}){
-            const chatMessagesRef =  React.useRef(null);
-            
-            React.useEffect(()=>{
-               const containerElem = chatMessagesRef.current;
-               if(containerElem){
-                containerElem.scrollTop = containerElem.scrollHeight;
-               }
-            }, [chatMessages]);
+            const chatMessagesRef =  useAutoScroll(chatMessages)//custom hook
 
             return (
                 <div className="chat-messages-container"
