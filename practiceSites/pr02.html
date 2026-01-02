@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>practice 02</title>
+    <style>
+        .button-on, .button{
+            border: none;
+            padding: 10px 15px;
+            color: white;
+            font-family: Arial, Helvetica, sans-serif;
+            border-radius: 10px;
+            
+            background-color: rgb(25, 135, 84);
+        }
+        .button-off{
+            background-color: rgb(220, 53, 69);
+        }
+    </style>
+</head>
+<body>
+    <div class="js-container">
+
+    </div>
+    
+    <script src="https://unpkg.com/supersimpledev/react.js"></script>
+    <!-- for react-dom -->
+    <script src="https://unpkg.com/supersimpledev/react-dom.js"></script>
+    <!-- for babel -->
+    <script src="https://unpkg.com/supersimpledev/babel.js"></script>
+
+    <script type="text/babel">
+
+        function ButtonOnOff(){
+            const [isOn , setIsOn] = React.useState(true);
+
+            function flipSwitch(){
+                setIsOn(
+                    prev=>!prev
+                );
+            }
+            
+            return (
+                <>
+                    <button
+                        className={`button ${isOn ? 'button-on' : 'button-off'}`}
+                        onClick={flipSwitch}
+                    >{isOn ? 'ON' : 'OFF'}</button>
+                </>
+            );
+        }
+
+        function App(){
+            return (
+                <div className="app-container">
+                    <ButtonOnOff/>
+                </div>
+            );
+        }
+        const container = document.querySelector('.js-container');
+        ReactDOM.createRoot(container).render(<App/>);
+    </script>
+</body>
+</html>

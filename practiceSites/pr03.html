@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        .textBox{
+            padding: 10px;
+            margin-top: 5px;
+            margin-right: 10px;
+            border-width: 1px;
+            border-radius: 5px;
+        }
+        .password-container{
+            margin-top: 10px;
+        }
+        .button-hide{
+            padding: 5px;
+        }
+        .signOptions{
+            background-color: rgb(0, 123, 255);
+            border: none;
+            margin-top: 10px;
+            margin-right: 10px;
+            padding: 10px;
+            border-radius: 5px;
+            color: white;
+        }
+
+    </style>
+
+</head>
+<body>
+    <div class="js-container">
+
+    </div>
+
+     <script src="https://unpkg.com/supersimpledev/react.js"></script>
+    <!-- for react-dom -->
+    <script src="https://unpkg.com/supersimpledev/react-dom.js"></script>
+    <!-- for babel -->
+    <script src="https://unpkg.com/supersimpledev/babel.js"></script>
+
+    <script type="text/babel">
+        
+        function EmailInput(){
+            const [email, setEmail] = React.useState('')
+
+            function typeEmail(event){
+                setEmail(event.target.value);
+            }
+
+            return(
+                <>
+                    <input 
+                        className="textBox js-email"
+                        placeholder="Email"
+                        value={email}
+                        onChange={typeEmail}
+                    >
+                    </input>
+                </>
+            );
+        }
+        function PasswordInput(){
+            
+            const [password, setPassword] = React.useState('');
+            const [hide, setHide] = React.useState(true);
+
+            function typePassword(event){
+                setPassword(event.target.value);
+            }
+
+            function hideShowPassword(){
+                setHide(prev=>!prev)
+            }
+
+            return(
+                <div className="password-container">
+                    <input 
+                        className="textBox js-password"
+                        placeholder="Password"
+                        type={`${hide ? 'password' : 'text'}`}
+                        value={password}
+                        onChange={typePassword}
+                    >
+                    </input>
+                    <button
+                        className="button-hide"
+                        onClick={hideShowPassword}
+
+                    >{`${hide ? 'Show' : 'Hide'}`}</button>
+                </div>
+            );
+        }
+
+        function SignOptions(){
+            return (
+                <div>
+                    <button
+                        className="signOptions"
+                    >
+                        Login
+                    </button>
+
+                    <button
+                        className="signOptions"
+                    >
+                        Sign up
+                    </button>
+                </div>
+            );
+        }
+
+
+        function App(){
+            
+            return(
+                <>
+                    <EmailInput/>
+                    <PasswordInput/>
+                    <SignOptions/>
+                </>
+            )
+        }
+
+        const container = document.querySelector('.js-container');
+        ReactDOM.createRoot(container).render(<App/>);
+    </script>
+</body>
+</html>
