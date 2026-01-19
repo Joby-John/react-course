@@ -4,7 +4,7 @@ function TrackingPage() {
 
     return (<>
 
-        <title>Tracking </title>
+        <title>Tracking</title>
         
         <div className="header">
             <div className="left-section">
